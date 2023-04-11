@@ -1,66 +1,48 @@
 #include<iostream>
+#include<conio.h>
+#include<queue>
 using namespace std;
-
-#define Q_SIZE 5
-
-typedef struct
-{
-    int data[ Q_SIZE + 1];
-    int head, tail;
-} Queue;
-
-void enqueue( Queue *q, int item)
-{
-    if((q -> tail + 1) % (Q_SIZE + 1))
-    {
-        cout<< "Queue is full "<<endl;
-        return;
-    }
-    q -> data[q -> tail] = item;
-    q -> tail = (q -> tail + 1) % (Q_SIZE + 1);
-}
-
-int dequeue( Queue *q)
-{
-    int item;
-
-    if( q -> tail == q -> head)
-    {
-        cout<< "Queue is empty\n";
-        return -1;
-    }
-
-    item = q -> data[q -> head];
-
-    q -> head = (q -> head + 1) % (Q_SIZE + 1);
-
-    return item;
-}
 
 int main()
 {
-    Queue my_q;
-    int item;
+    queue<int>q,q1;
 
-    my_q.head = 0;
-    my_q.tail = 0;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.push(5);
+    q.emplace(6);
 
-    enqueue(&my_q, 1);
-    cout<< "Tail = " << my_q.tail;
+    q1.push(7);
+    q1.push(8);
+    q1.push(9);
 
-    enqueue( &my_q, 2);
-    cout<< "Tail = " << my_q.tail;
+    cout<< q.size()<<endl;
+    cout<< q.front()<<endl;
+    cout<< q.back()<<endl;
 
-    cout<< "Beginning head = "<< my_q.head;
-    item = dequeue(&my_q);
+    if(q.empty())cout<< "Empty"<<endl;
+    else cout<< "Not Empty" <<endl;
 
-    cout<< "Item = " << item << " head = " << my_q.head;
-    item = dequeue(&my_q);
+    q.pop();
+    cout<< q.front()<<endl;
 
-    cout<< "Item = " << item << " head = " << my_q.head;
-    item = dequeue(&my_q);
+    q.swap(q1);
+
+    while(!q.empty())
+    {
+        cout<< q.front() << " ";
+        q.pop();
+    }
 
 
 
-    return 0;
+
+
+
+
+
+
+    getch();
 }
